@@ -51,5 +51,23 @@ class UserController {
       res.status(400).json({ message: error.message });
     }
   }
+  static async Login(req, res) {
+    try {
+      const { email, password } = req.body;
+      if (password != undefined && email != undefined) {
+        let user = await userService.login(email, password);
+        res
+          .status(200)
+          .json({ user, message: "Logged in to existing user successfully" });
+      } else {
+        throw new Error(
+          "Missing required fields or wrong email or wrong email"
+        );
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
 }
 export default UserController;

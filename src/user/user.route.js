@@ -11,6 +11,7 @@ router.get("/getOneById", userController.getOne);
 router.get("/findAll", userController.GetAll);
 router.delete("/delete", userController.deleteUser);
 router.delete("/deletemany/firstName", userController.deleteUsers);
+router.get("/login", userController.Login);
 export default router;
 //password can be  post or patch
 
