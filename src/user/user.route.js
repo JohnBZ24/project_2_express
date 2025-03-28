@@ -3,16 +3,16 @@ import userController from "./user.controller.js";
 //import userController from"./user.controller.js";
 const router = express.Router();
 
- 
- router.post("/signUp", userController.signup); 
- router.get("/login",userController.login);
- router.patch("/updateinfo",userController.changeInfo);
- router.patch("/changepass",userController.Changepass)
-
-
-export default router;  
-
-
+router.post("/signUp", userController.signup);
+//router.get("/login", userController.login);
+//router.patch("/updateinfo", userController.changeInfo);
+//router.patch("/changepass", userController.Changepass);
+router.get("/getOneById", userController.getOne);
+router.get("/findAll", userController.GetAll);
+router.delete("/delete", userController.deleteUser);
+router.delete("/deletemany/firstName", userController.deleteUsers);
+export default router;
+//password can be  post or patch
 
 /*router.post("/signup",(req,res)=>{
   console.log("baroud ");

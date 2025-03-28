@@ -1,57 +1,33 @@
-let user =[];
-const createuser = async (
-  firstname,
-  lastname,
-  password,
-  email
-)=>{
-  let object = {
-    firstname:"",
-    lastname:"",
-    email:"",
-    password:""
+import userModel from "./user.model.js";
+
+class UserService {
+  static async createUser(email, firstName, lastName, password) {
+    await new userModel({
+      email,
+      firstName,
+      lastName,
+      password,
+    }).save();
   }
-  object.firstname = firstname;
-  object.lastname= lastname;
-  object.password = password;
-  object.email = email;
-  user.push(object);
+
+  static async findUserbyId(userId) {
+    const user = await userModel.findOne({ _id: userId });
+    return user;
+  }
+
+  static async findAll() {
+    const users = await userModel.find();
+    return users;
+  }
+
+  static async deleteUser(userId) {
+    const deluser = await userModel.deleteOne({ _id: userId });
+    return deluser;
+  }
+  static async deleteUsers(firstName) {
+    const delusers = await userModel.deleteMany({ firstName });
+    return delusers;
+  }
 }
-const checskuser= async (email,password)=>{
-  console.log(" iam in the check user");
-    }
-  for(const v in user)
-    if(v.email == email && v.password ==password)
-    {
-      console.log("user found");
-        }
-    else{
-      console.log("false ");
-    }
-  
-  const changeInfo = async (email,firstname,lastname,password)=>{
-  let  account = checskuser(email,password);//to get the user and check if hes found
-  if(account)
-  {
-    account.firstname = firstname;
-    account.lastname = lastname;
-    account.email  = email;
-  }
 
-  }
-  const Changepass = async (email,password)=>{
-    let  account = checskuser(email,password);//to get the user and check if hes found
-    if(account)
-    {
-      console.log("new password");
-      account.password = password
-    }
-
-  }
-export default {
-  createuser,
-  checskuser,
-  changeInfo,
-  Changepass
-
-}
+export default UserService;
